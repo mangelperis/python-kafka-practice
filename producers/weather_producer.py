@@ -1,3 +1,4 @@
+import json
 import logging
 from datetime import datetime
 import requests
@@ -33,6 +34,8 @@ class WeatherProducer:
     def produce_weather(self, topic: str):
         try:
             weather_data = self.get_weather()
+            logging.info("API Response: %s", json.dumps(weather_data, indent=2))
+
             value = {
                 **weather_data['current'],
                 'timestamp': datetime.now().isoformat()

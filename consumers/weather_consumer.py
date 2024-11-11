@@ -73,7 +73,7 @@ class WeatherConsumer:
                 msg = self.consumer.poll(1.0)
 
                 if msg is None:
-                    logging.warning("No messages received")
+                    logging.debug("No messages received")
                     continue
                 if msg.error():
                     logging.error("Consumer error: %s", msg.error())
