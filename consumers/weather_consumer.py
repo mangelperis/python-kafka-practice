@@ -5,31 +5,24 @@ from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroDeserializer, AvroSerializer
 from confluent_kafka.serialization import SerializationContext, MessageField
 from utils.kafka_utils import KafkaCallback, TempUtils
+from config.settings import get_consumer_config, get_producer_config, get_schema_registry_config
 
 class WeatherConsumer:
-    def __init__(self, schema_registry_url: str, bootstrap_servers: str,
-                 input_schema: str, output_schema: str, group_id: str):
-        self.schema_registry_client = SchemaRegistryClient({'url': schema_registry_url})
+    def __init__(self, input_schema: str, output_schema: str, group_id: str):
+        self.schema_registry_client = SchemaRegistryClient(get_schema_registry_config())
 
-        # Setup consumer with Avro deserializer
         self.avro_deserializer = AvroDeserializer(
             self.schema_registry_client,
             input_schema
         )
 
-        # Setup producer with Avro serializer for transformed messages
         self.avro_serializer = AvroSerializer(
             self.schema_registry_client,
             output_schema
         )
 
-        self.consumer = Consumer({
-            'bootstrap.servers': bootstrap_servers,
-            'group.id': group_id,
-            'auto.offset.reset': 'earliest'
-        })
-
-        self.producer = Producer({'bootstrap.servers': bootstrap_servers})
+        self.consumer = Consumer(get_consumer_config(group_id))
+        self.producer = Producer(get_producer_config())
 
     def process_message(self, msg, output_topic: str):
         try:

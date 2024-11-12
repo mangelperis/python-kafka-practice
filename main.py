@@ -1,5 +1,6 @@
 import logging
 from logging import DEBUG
+from config.settings import KAFKA_ENV
 from schemas.weather import (
     WEATHER_API_VALUE_SCHEMA,
     WEATHER_FINAL_SCHEMA
@@ -9,9 +10,6 @@ from consumers.weather_consumer import WeatherConsumer
 
 
 def main():
-    # Configuration
-    SCHEMA_REGISTRY_URL = "http://localhost:8081"
-    BOOTSTRAP_SERVERS = "localhost:9092"
     INPUT_TOPIC = "weather-forecast"
     OUTPUT_TOPIC = "weather-forecast-transformed"
 
@@ -21,23 +19,16 @@ def main():
         format='%(asctime)s - %(levelname)s - %(message)s'
     )
 
-    try:
-        # Create and run producer
-        producer = WeatherProducer(
-            schema_registry_url=SCHEMA_REGISTRY_URL,
-            bootstrap_servers=BOOTSTRAP_SERVERS,
-            value_schema=WEATHER_API_VALUE_SCHEMA
-        )
+    logging.info("Running in %s mode", KAFKA_ENV)
 
-        # Produce one weather message
+    try:
+        producer = WeatherProducer(value_schema=WEATHER_API_VALUE_SCHEMA)
         logging.info("Producing weather message...")
         producer.produce_weather(INPUT_TOPIC)
 
         # Create and run consumer
         logging.info("Starting consumer...")
         consumer = WeatherConsumer(
-            schema_registry_url=SCHEMA_REGISTRY_URL,
-            bootstrap_servers=BOOTSTRAP_SERVERS,
             input_schema=WEATHER_API_VALUE_SCHEMA,
             output_schema=WEATHER_FINAL_SCHEMA,
             group_id='weather-transformer'
