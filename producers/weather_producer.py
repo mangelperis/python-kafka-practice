@@ -7,7 +7,7 @@ from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroSerializer
 from confluent_kafka.serialization import SerializationContext, MessageField
 from utils.kafka_utils import KafkaCallback
-from config.settings import get_producer_config, get_schema_registry_config
+from config.settings import get_kafka_config, get_schema_registry_config
 
 # Define a GPS position
 latitude = 39.5333
@@ -18,7 +18,7 @@ class WeatherProducer:
     def __init__(self, value_schema: str):
         self.schema_registry_client = SchemaRegistryClient(get_schema_registry_config())
         self.avro_serializer = AvroSerializer(self.schema_registry_client, value_schema)
-        self.producer = Producer(get_producer_config())
+        self.producer = Producer(get_kafka_config())
 
     @staticmethod
     def get_weather():

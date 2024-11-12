@@ -5,7 +5,7 @@ from confluent_kafka.schema_registry import SchemaRegistryClient
 from confluent_kafka.schema_registry.avro import AvroDeserializer, AvroSerializer
 from confluent_kafka.serialization import SerializationContext, MessageField
 from utils.kafka_utils import KafkaCallback, TempUtils
-from config.settings import get_consumer_config, get_producer_config, get_schema_registry_config
+from config.settings import get_consumer_config, get_kafka_config, get_schema_registry_config
 
 class WeatherConsumer:
     def __init__(self, input_schema: str, output_schema: str, group_id: str):
@@ -22,7 +22,7 @@ class WeatherConsumer:
         )
 
         self.consumer = Consumer(get_consumer_config(group_id))
-        self.producer = Producer(get_producer_config())
+        self.producer = Producer(get_kafka_config())
 
     def process_message(self, msg, output_topic: str):
         try:
