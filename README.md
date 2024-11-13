@@ -61,7 +61,7 @@ docker exec -it schema-registry kafka-avro-console-consumer \
 curl http://localhost:8081/schemas/types
 ```
 
-*INPUT TOPIC*
+*INPUT TOPIC CONSUMER*
 ```
 docker exec -it schema-registry kafka-avro-console-consumer \
     --bootstrap-server kafka:29092 \
@@ -70,7 +70,7 @@ docker exec -it schema-registry kafka-avro-console-consumer \
     --property schema.registry.url=http://schema-registry:8081
 ```
 
-*OUTPUT TOPIC*
+*OUTPUT TOPIC CONSUMER (transformed)*
 ```
 docker exec -it schema-registry kafka-avro-console-consumer \
     --bootstrap-server kafka:29092 \
