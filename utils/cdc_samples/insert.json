@@ -1,0 +1,46 @@
+{
+  "before": null,
+  "after": {
+    "cdc.weather.forecast.Value": {
+      "id": 6,
+      "time": "2024-11-14T15:00:00",
+      "interval_seconds": 3600,
+      "temperature_2m": 20.5,
+      "relative_humidity_2m": 65,
+      "apparent_temperature": 19.8,
+      "is_day": 1,
+      "precipitation": 0,
+      "rain": 0,
+      "timestamp": "2024-11-14 16:32:59",
+      "created_at": {
+        "string": "2024-11-14T16:32:59Z"
+      }
+    }
+  },
+  "source": {
+    "version": "2.4.2.Final",
+    "connector": "mysql",
+    "name": "cdc",
+    "ts_ms": 1731602439000,
+    "snapshot": {
+      "string": "last"
+    },
+    "db": "weather",
+    "sequence": null,
+    "table": {
+      "string": "forecast"
+    },
+    "server_id": 0,
+    "gtid": null,
+    "file": "mysql-bin.000023",
+    "pos": 157,
+    "row": 0,
+    "thread": null,
+    "query": null
+  },
+  "op": "r",
+  "ts_ms": {
+    "long": 1731602439351
+  },
+  "transaction": null
+}

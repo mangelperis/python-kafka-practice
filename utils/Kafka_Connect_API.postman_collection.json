@@ -1,0 +1,276 @@
+{
+	"info": {
+		"_postman_id": "0e7c6def-ee82-4e76-8c65-c346a1c73f67",
+		"name": "Kafka Connect API",
+		"description": "Collection for managing Debezium MySQL CDC connectors",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "14476482",
+		"_collection_link": "https://exoticca.postman.co/workspace/WEB~53e3994c-3a0b-44a3-8ec3-3c9bb463fef6/collection/14476482-0e7c6def-ee82-4e76-8c65-c346a1c73f67?action=share&source=collection_link&creator=14476482"
+	},
+	"item": [
+		{
+			"name": "List Connectors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{}
+				],
+				"url": {
+					"raw": "http://localhost:8083/connectors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Connector Status",
+			"request": {
+				"method": "GET",
+				"header": [
+					{}
+				],
+				"url": {
+					"raw": "http://localhost:8083/connectors/mysql-connector/status",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"mysql-connector",
+						"status"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Create MySQL Connector",
+			"request": {
+				"method": "POST",
+				"header": [
+					{}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"name\": \"mysql-connector\",\n    \"config\": {\n        \"tasks.max\": \"1\",\n        \"connector.class\": \"io.debezium.connector.mysql.MySqlConnector\",\n        \"database.hostname\": \"mysql\",\n        \"database.port\": \"3306\",\n        \"database.user\": \"dev\",\n        \"database.password\": \"dev\",\n        \"database.server.id\": \"1\",\n        \"database.server.name\": \"mysql\",\n        \"database.include.list\": \"weather\",\n        \"include.schema.changes\": true,\n        \"table.include.list\": \"weather.forecast\",\n        \"topic.prefix\": \"cdc\",\n        \"topic.creation.default.replication.factor\": 1,\n        \"topic.creation.default.partitions\": 1,\n        \"topic.creation.default.cleanup.policy\": \"compact\",\n        \"topic.creation.default.compression.type\": \"producer\",\n        \"schema.history.internal.kafka.bootstrap.servers\": \"kafka:29092\",\n        \"schema.history.internal.kafka.topic\": \"schema-changes.weather\",\n        \"schema.history.internal.store.only.monitored.tables.ddl\": true,\n        \"schema.history.internal.store.only.captured.tables.ddl\": true,\n        \"schema.history.internal.skip.unparseable.ddl\": true,\n        \"snapshot.mode\": \"when_needed\",\n        \"key.converter\": \"io.confluent.connect.avro.AvroConverter\",\n        \"key.converter.schema.registry.url\": \"http://schema-registry:8081\",\n        \"value.converter\": \"io.confluent.connect.avro.AvroConverter\",\n        \"value.converter.schema.registry.url\": \"http://schema-registry:8081\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/connectors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update Connector Configuration",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"tasks.max\": \"1\",\n    \"connector.class\": \"io.debezium.connector.mysql.MySqlConnector\",\n    \"database.hostname\": \"mysql\",\n    \"database.port\": \"3306\",\n    \"database.user\": \"dev\",\n    \"database.password\": \"dev\",\n    \"database.server.id\": \"1\",\n    \"database.server.name\": \"mysql\",\n    \"database.include.list\": \"weather\",\n    \"include.schema.changes\": true,\n    \"table.include.list\": \"weather.forecast\",\n    \"topic.prefix\": \"cdc\",\n    \"topic.creation.default.replication.factor\": 1,\n    \"topic.creation.default.partitions\": 1,\n    \"topic.creation.default.cleanup.policy\": \"compact\",\n    \"topic.creation.default.compression.type\": \"producer\",\n    \"schema.history.internal.kafka.bootstrap.servers\": \"kafka:29092\",\n    \"schema.history.internal.kafka.topic\": \"schema-changes.weather\",\n    \"schema.history.internal.store.only.monitored.tables.ddl\": true,\n    \"schema.history.internal.store.only.captured.tables.ddl\": true,\n    \"schema.history.internal.skip.unparseable.ddl\": true,\n    \"snapshot.mode\": \"when_needed\",\n    \"key.converter\": \"io.confluent.connect.avro.AvroConverter\",\n    \"key.converter.schema.registry.url\": \"http://schema-registry:8081\",\n    \"value.converter\": \"io.confluent.connect.avro.AvroConverter\",\n    \"value.converter.schema.registry.url\": \"http://schema-registry:8081\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8083/connectors/mysql-connector/config",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"mysql-connector",
+						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete Connector",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{}
+				],
+				"url": {
+					"raw": "http://localhost:8083/connectors/mysql-connector",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"mysql-connector"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Connector Config",
+			"request": {
+				"method": "GET",
+				"header": [
+					{}
+				],
+				"url": {
+					"raw": "http://localhost:8083/connectors/mysql-connector/config",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"mysql-connector",
+						"config"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Connector Tasks",
+			"request": {
+				"method": "GET",
+				"header": [
+					{}
+				],
+				"url": {
+					"raw": "http://localhost:8083/connectors/mysql-connector/tasks",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"mysql-connector",
+						"tasks"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Restart Connector",
+			"request": {
+				"method": "POST",
+				"header": [
+					{}
+				],
+				"url": {
+					"raw": "http://localhost:8083/connectors/mysql-connector/restart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"mysql-connector",
+						"restart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Pause Connector",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{}
+				],
+				"url": {
+					"raw": "http://localhost:8083/connectors/mysql-connector/pause",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"mysql-connector",
+						"pause"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Resume Connector",
+			"request": {
+				"method": "PUT",
+				"header": [
+					{}
+				],
+				"url": {
+					"raw": "http://localhost:8083/connectors/mysql-connector/resume",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connectors",
+						"mysql-connector",
+						"resume"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Connector Plugins",
+			"request": {
+				"method": "GET",
+				"header": [
+					{}
+				],
+				"url": {
+					"raw": "http://localhost:8083/connector-plugins",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8083",
+					"path": [
+						"connector-plugins"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
