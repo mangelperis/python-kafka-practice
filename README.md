@@ -93,6 +93,7 @@ A folder named `var` will be created in the project root folder upon the first r
 ```bash
 python3 main.py
 ```
+Check the [Confluent Control Center UI](http://localhost:9021/) for graphical monitoring.
 
 ## How it works?
 You have 6 containers running. Check the running containers by using the command: ``docker ps``
