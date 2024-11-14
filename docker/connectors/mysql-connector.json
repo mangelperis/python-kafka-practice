@@ -1,0 +1,31 @@
+{
+  "name": "mysql-connector",
+  "config": {
+    "tasks.max": "1",
+    "connector.class": "io.debezium.connector.mysql.MySqlConnector",
+    "database.hostname": "mysql",
+    "database.port": "3306",
+    "database.user": "dev",
+    "database.password": "dev",
+    "database.server.id": "1",
+    "database.server.name": "mysql",
+    "database.include.list": "weather",
+    "include.schema.changes": true,
+    "table.include.list": "weather.forecast",
+    "topic.prefix": "cdc",
+    "topic.creation.default.replication.factor": 1,
+    "topic.creation.default.partitions": 1,
+    "topic.creation.default.cleanup.policy": "compact",
+    "topic.creation.default.compression.type": "producer",
+    "schema.history.internal.kafka.bootstrap.servers": "kafka:29092",
+    "schema.history.internal.kafka.topic": "schema-changes.weather",
+    "schema.history.internal.store.only.monitored.tables.ddl": true,
+    "schema.history.internal.store.only.captured.tables.ddl": true,
+    "schema.history.internal.skip.unparseable.ddl": true,
+    "snapshot.mode": "when_needed",
+    "value.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "value.converter.schemas.enable": true,
+    "key.converter": "org.apache.kafka.connect.json.JsonConverter",
+    "key.converter.schemas.enable": true
+  }
+}
