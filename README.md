@@ -265,7 +265,7 @@ docker exec -it mysql mysql -u<user> -p<password> -e "PURGE BINARY LOGS BEFORE N
 
 #### Connector API REST
 Use Postman or another CLI to perform actions on each endpoint.
-The [postman collection](https://github.com/mangelperis/python-kafka/blob/main/utils/Kafka_Connect_API.postman_collection.json) includes all essential endpoints for:
+The [postman collection](https://github.com/mangelperis/python-kafka-practice/blob/main/utils/Kafka_Connect_API.postman_collection.json) includes all essential endpoints for:
 
     Listing connectors
     Creating/Updating connectors
@@ -284,4 +284,4 @@ docker logs kafka
 ```
 
 ## CDC Samples
-Check the contents [here](https://github.com/mangelperis/python-kafka/blob/main/utils/cdc_samples).
+Check the contents [here](https://github.com/mangelperis/python-kafka-practice/tree/main/utils/cdc_samples).
