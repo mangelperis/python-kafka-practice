@@ -7,4 +7,4 @@ env/
 .DS_Store
 
 /var/
-.idea/
+/idea/
