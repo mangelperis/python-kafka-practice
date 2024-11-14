@@ -7,4 +7,5 @@ env/
 .DS_Store
 
 /var/
-/idea/
+#PyCharm IDE
+.idea/
