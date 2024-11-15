@@ -286,3 +286,14 @@ docker logs kafka
 
 ## CDC Samples
 Check the contents [here](https://github.com/mangelperis/python-kafka-practice/tree/main/utils/cdc_samples).
+
+## Connector settings
+By default, the settings should manage any schema/stream type (JSON, AVRO...) but if you want to specify which schema and converter
+to use (only) add this to the `.json` settings file (AVRO example):
+```text
+    "key.converter": "io.confluent.connect.avro.AvroConverter",
+    "key.converter.schema.registry.url": "http://schema-registry:8081",
+    "value.converter": "io.confluent.connect.avro.AvroConverter",
+    "value.converter.schema.registry.url": "http://schema-registry:8081"
+```
+A restart of the `control-center` is required after updating connector settigns in order to make it work properly.

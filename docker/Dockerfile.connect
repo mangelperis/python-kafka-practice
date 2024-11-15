@@ -1,6 +1,7 @@
 FROM confluentinc/cp-kafka-connect:7.7.1
 
 # Install Debezium MySQL Connector
+# Available releases out of the hub are here: https://repo1.maven.org/maven2/io/debezium/debezium-connector-mysql/
 RUN confluent-hub install --no-prompt debezium/debezium-connector-mysql:2.4.2
 
 # Copy the connector configuration file
