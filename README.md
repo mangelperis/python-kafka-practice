@@ -284,10 +284,7 @@ Check the logs for further debug:
 docker logs kafka
 ```
 
-## CDC Samples
-Check the contents [here](https://github.com/mangelperis/python-kafka-practice/tree/main/utils/cdc_samples).
-
-## Connector settings
+### Connector settings
 By default, the settings should manage any schema/stream type (JSON, AVRO...) but if you want to specify which schema and converter
 to use (only) add this to the `.json` settings file (AVRO example):
 ```text
@@ -297,3 +294,6 @@ to use (only) add this to the `.json` settings file (AVRO example):
     "value.converter.schema.registry.url": "http://schema-registry:8081"
 ```
 A restart of the `control-center` is required after updating connector settigns in order to make it work properly.
+
+## CDC Samples
+Check the contents [here](https://github.com/mangelperis/python-kafka-practice/tree/main/utils/cdc_samples).
